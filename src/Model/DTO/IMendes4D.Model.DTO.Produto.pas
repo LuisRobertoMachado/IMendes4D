@@ -12,11 +12,11 @@ type
     iModelProdutoDTO<T>)
   private
     [weak]
-    FParent: iEntity;
+    FParent: iModelRegrasFiscaisDTO;
     FJsonPair: TJSONObject;
     FJsonArrayProdutos: TJSONArray;
     FJson: TJSONObject;
-    constructor CreatePrivate(const Parent: iEntity; const JSON: TJSONObject);
+    constructor CreatePrivate(const Parent: iModelRegrasFiscaisDTO; const JSON: TJSONObject);
   public
     constructor Create;
     destructor Destroy; override;
@@ -28,7 +28,7 @@ type
     function NCM(const Value: string): iModelProdutoDTO<T>;    
     function Next: iModelProdutoDTO<T>;
     function &End: T;
-    class function New(const Parent: iEntity; const JSON: TJSONObject)
+    class function New(const Parent: iModelRegrasFiscaisDTO; const JSON: TJSONObject)
       : iModelProdutoDTO<T>;
   end;
 
@@ -60,7 +60,7 @@ begin
   raise Exception.Create('Para obter uma instancia, utiliza a função New');
 end;
 
-constructor TModelProdutoDTO<T>.CreatePrivate(const Parent: iEntity;
+constructor TModelProdutoDTO<T>.CreatePrivate(const Parent: iModelRegrasFiscaisDTO;
   const JSON: TJSONObject);
 begin
   FParent := Parent;
@@ -88,7 +88,7 @@ begin
   FJson.AddPair('nCM', Value);
 end;
 
-class function TModelProdutoDTO<T>.New(const Parent: iEntity;
+class function TModelProdutoDTO<T>.New(const Parent: iModelRegrasFiscaisDTO;
   const JSON: TJSONObject): iModelProdutoDTO<T>;
 begin
   Result := Self.CreatePrivate(Parent, JSON);

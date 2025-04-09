@@ -1,0 +1,11 @@
+{
+	"name": "IMendes4D",
+	"description": "Abstração da integração com API tributária IMendes",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"https://github.com/russimar/log": "^v1.0.0"
+	}
+}

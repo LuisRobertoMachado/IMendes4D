@@ -12,10 +12,10 @@ type
     iModelCabecalhoDTO<T>)
   private
     [weak]
-    FParent: iEntity;
+    FParent: iModelRegrasFiscaisDTO;
     FJsonPair: TJSONObject;
     FJson: TJSONObject;
-    constructor CreatePrivate(Parent: iEntity; JSON: TJSONObject);
+    constructor CreatePrivate(Parent: iModelRegrasFiscaisDTO; JSON: TJSONObject);
   public
     constructor Create;
     destructor Destroy; override;
@@ -27,7 +27,7 @@ type
     function Ambiente(Value: integer): iModelCabecalhoDTO<T>;
     function Contribuinte(Value: integer): iModelCabecalhoDTO<T>;
     function &End: T;
-    class function New(Parent: iEntity; JSON: TJSONObject)
+    class function New(Parent: iModelRegrasFiscaisDTO; JSON: TJSONObject)
       : iModelCabecalhoDTO<T>;
   end;
 
@@ -77,11 +77,11 @@ begin
   raise Exception.Create('Para obter uma instancia, utiliza a função New');
 end;
 
-constructor TModelCabecalhoDTO<T>.CreatePrivate(Parent: iEntity;
+constructor TModelCabecalhoDTO<T>.CreatePrivate(Parent: iModelRegrasFiscaisDTO;
   JSON: TJSONObject);
 begin
   FParent := Parent;
-  FJsonPair := JSON;
+  FJson := JSON;
   FJson := TJSONObject.Create;
 end;
 
@@ -97,7 +97,7 @@ begin
   inherited;
 end;
 
-class function TModelCabecalhoDTO<T>.New(Parent: iEntity; JSON: TJSONObject)
+class function TModelCabecalhoDTO<T>.New(Parent: iModelRegrasFiscaisDTO; JSON: TJSONObject)
   : iModelCabecalhoDTO<T>;
 begin
   Result := Self.CreatePrivate(Parent, JSON);

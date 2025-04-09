@@ -11,17 +11,17 @@ type
   TModelUFDTO<T: IInterface> = class(TInterfacedObject, iModelUFDTO<T>)
   private
     [weak]
-    FParent: iEntity;
+    FParent: iModelRegrasFiscaisDTO;
     FJsonPair: TJsonObject;
     FJson: TJsonArray;
-    constructor CreatePrivate(const Parent: iEntity; JSON: TJsonObject);
+    constructor CreatePrivate(const Parent: iModelRegrasFiscaisDTO; JSON: TJsonObject);
   public
     constructor Create;
     destructor Destroy; override;
     function Sigla(const Value: string): iModelUFDTO<T>;
     function Next: iModelUFDTO<T>;
     function &End: T;
-    class function New(const Parent: iEntity; JSON: TJsonObject)
+    class function New(const Parent: iModelRegrasFiscaisDTO; JSON: TJsonObject)
       : iModelUFDTO<T>;
   end;
 
@@ -40,7 +40,7 @@ begin
   raise Exception.Create('Para obter uma instancia, utiliza a função New');
 end;
 
-constructor TModelUFDTO<T>.CreatePrivate(const Parent: iEntity;
+constructor TModelUFDTO<T>.CreatePrivate(const Parent: iModelRegrasFiscaisDTO;
   JSON: TJsonObject);
 begin
   FParent := Parent;
@@ -54,7 +54,7 @@ begin
   inherited;
 end;
 
-class function TModelUFDTO<T>.New(const Parent: iEntity; JSON: TJsonObject)
+class function TModelUFDTO<T>.New(const Parent: iModelRegrasFiscaisDTO; JSON: TJsonObject)
   : iModelUFDTO<T>;
 begin
   Result := Self.CreatePrivate(Parent, JSON);

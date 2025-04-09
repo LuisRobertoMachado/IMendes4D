@@ -1,0 +1,58 @@
+package IMendes4D;
+
+{$R *.res}
+{$IFDEF IMPLICITBUILDING This IFDEF should not be used by users}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO OFF}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION OFF}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES ON}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DEFINE DEBUG}
+{$ENDIF IMPLICITBUILDING}
+{$IMPLICITBUILD ON}
+
+requires
+  rtl,
+  bindengine,
+  bindcomp,
+  RESTComponents;
+
+contains
+  IMendes4D.Interfaces in 'src\IMendes4D.Interfaces.pas',
+  IMendes4D in 'src\IMendes4D.pas',
+  IMendes4D.Auth.Authenticator in 'src\Auth\IMendes4D.Auth.Authenticator.pas',
+  IMendes4D.Auth.Interfaces in 'src\Auth\IMendes4D.Auth.Interfaces.pas',
+  IMendes4D.HttpClient.IMendesAPI in 'src\HttpClient\IMendes4D.HttpClient.IMendesAPI.pas',
+  IMendes4D.HttpClient.Interfaces in 'src\HttpClient\IMendes4D.HttpClient.Interfaces.pas',
+  IMendes4D.HttpClient.RestHttpClient in 'src\HttpClient\IMendes4D.HttpClient.RestHttpClient.pas',
+  IMendes4D.Model.Entity in 'src\Model\IMendes4D.Model.Entity.pas',
+  IMendes4D.Model.Interfaces in 'src\Model\IMendes4D.Model.Interfaces.pas',
+  IMendes4D.Model.DTO.Cabecalho in 'src\Model\DTO\IMendes4D.Model.DTO.Cabecalho.pas',
+  IMendes4D.Model.DTO.Produto in 'src\Model\DTO\IMendes4D.Model.DTO.Produto.pas',
+  IMendes4D.Model.DTO.UF in 'src\Model\DTO\IMendes4D.Model.DTO.UF.pas',
+  IMendes4D.Model.DTO.RegrasFiscais in 'src\Model\DTO\IMendes4D.Model.DTO.RegrasFiscais.pas',
+  IMendes4D.Model.DTO.EnviaRecebeDados in 'src\Model\DTO\IMendes4D.Model.DTO.EnviaRecebeDados.pas',
+  IMendes4D.Model.DTO.HistoricoAcesso in 'src\Model\DTO\IMendes4D.Model.DTO.HistoricoAcesso.pas',
+  IMendes4D.Types in 'src\IMendes4D.Types.pas',
+  IMendes4D.Model.DTO.ProdutosAlterados in 'src\Model\DTO\IMendes4D.Model.DTO.ProdutosAlterados.pas',
+  IMendes4D.Model.DTO.RemoveDevolvidos in 'src\Model\DTO\IMendes4D.Model.DTO.RemoveDevolvidos.pas',
+  IMendes4D.Model.DTO.RemoveDevolvidos.Produtos in 'src\Model\DTO\IMendes4D.Model.DTO.RemoveDevolvidos.Produtos.pas';
+
+end.
+

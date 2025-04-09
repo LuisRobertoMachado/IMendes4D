@@ -5,6 +5,7 @@ interface
 uses
   System.SysUtils,
   IMendes4D.Interfaces,
+  IMendes4D.Types,
   IMendes4D.HttpClient.interfaces,
   IMendes4D.HttpClient.RestHttpClient,
   IMendes4D.Auth.Interfaces,
@@ -18,7 +19,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function POST: iIMendesAPI;
+    function POST(const EndPoint: TEndpointBaseType): iIMendesAPI;
     function Body(Value: iEntity): iIMendesAPI;
     function Content: string;
     function StatusCode: integer;
@@ -67,10 +68,10 @@ begin
   result := Self.CreatePrivate(Auth);
 end;
 
-function TIMendesAPI.POST: iIMendesAPI;
+function TIMendesAPI.POST(const EndPoint: TEndpointBaseType): iIMendesAPI;
 begin
   result := Self;
-  FHttpClient.POST;
+  FHttpClient.POST(EndPoint.GetValue);
 end;
 
 function TIMendesAPI.StatusCode: integer;

@@ -25,7 +25,7 @@ type
     destructor Destroy; override;
     function URL(AURL: string): iHttpClient;
     function Headers(aKey: String; aValue: String): iHttpClient;
-    function POST: iHttpClient;
+    function POST(const EndPoint: string): iHttpClient;
     function Body(Value: string): iHttpClient;
     function Content: string;
     function StatusCode: integer;
@@ -33,9 +33,6 @@ type
   end;
 
 implementation
-
-uses
-  GravarLog;
 
 { THttpClient }
 
@@ -71,9 +68,6 @@ end;
 
 procedure THttpClient.DoBeforeExecute;
 begin
-  if (DebugHook > 0) then
-    TGravarLog.New.DoSaveLog(FBody);
-
   SetRestClient;
   SetRestResponse;
   SetRestRequest;
@@ -90,11 +84,12 @@ begin
   result := Self.CreatePrivate;
 end;
 
-function THttpClient.POST: iHttpClient;
+function THttpClient.POST(const EndPoint: string): iHttpClient;
 begin
   DoBeforeExecute;
 
   FRestRequest.Method := rmPOST;
+  FRestRequest.Resource := EndPoint;
   FRestRequest.Execute;
 end;
 

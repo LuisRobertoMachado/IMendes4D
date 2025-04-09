@@ -10,35 +10,34 @@ uses
 type
   TEntity = class(TInterfacedObject, iEntity)
   private
-    FJson: TJsonObject;
+    FJson: string;
     constructor CreatePrivate;
   public
     constructor Create;
     destructor Destroy; override;
-    function AsJson: string;
-    function Cabecalho: iModelCabecalhoDTO<iEntity>;
-    function UFs: iModelUFDTO<iEntity>;
-    function Produtos: iModelProdutoDTO<iEntity>;
+    function RegrasFiscais: iModelRegrasFiscaisDTO;
+    function EnviaRecebeDados: iModelEnviaRecebeDadosDTO<iEntity>;
+    function AsJson(const Value: string): iEntity; Overload;
+    function AsJson: string; Overload;
     class function New: iEntity;
   end;
 
 implementation
 
 uses
-  IMendes4D.Model.DTO.Cabecalho,
-  IMendes4D.Model.DTO.UF,
-  IMendes4D.Model.DTO.Produto;
+  IMendes4D.Model.DTO.RegrasFiscais, IMendes4D.Model.DTO.EnviaRecebeDados;
 
 { TEntity }
 
 function TEntity.AsJson: string;
 begin
-  Result := FJson.ToString;
+  Result := FJson;
 end;
 
-function TEntity.Cabecalho: iModelCabecalhoDTO<iEntity>;
+function TEntity.AsJson(const Value: string): iEntity;
 begin
-  result := TModelCabecalhoDTO<iEntity>.New(Self, FJSon);
+  Result := Self;
+  FJson := Value;
 end;
 
 constructor TEntity.Create;
@@ -49,13 +48,18 @@ end;
 constructor TEntity.CreatePrivate;
 begin
   inherited Create;
-  FJson := TJSONObject.Create;
+
 end;
 
 destructor TEntity.Destroy;
 begin
-  FJson.Free;
+
   inherited;
+end;
+
+function TEntity.EnviaRecebeDados: iModelEnviaRecebeDadosDTO<iEntity>;
+begin
+  Result := TModelEnviaRecebeDadosDTO<iEntity>.New(Self);
 end;
 
 class function TEntity.New: iEntity;
@@ -63,14 +67,9 @@ begin
   result := Self.CreatePrivate;
 end;
 
-function TEntity.Produtos: iModelProdutoDTO<iEntity>;
+function TEntity.RegrasFiscais: iModelRegrasFiscaisDTO;
 begin
-  Result := TModelProdutoDTO<iEntity>.New(Self, FJSon);
-end;
-
-function TEntity.UFs: iModelUFDTO<iEntity>;
-begin
-  result := TModelUFDTO<iEntity>.New(Self, FJSon);
+  Result := TModelRegrasFiscaisDTO.New(Self);
 end;
 
 end.
