@@ -81,7 +81,7 @@ constructor TModelCabecalhoDTO<T>.CreatePrivate(Parent: iModelRegrasFiscaisDTO;
   JSON: TJSONObject);
 begin
   FParent := Parent;
-  FJson := JSON;
+  FJsonPair := JSON;
   FJson := TJSONObject.Create;
 end;
 

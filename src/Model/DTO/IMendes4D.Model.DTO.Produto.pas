@@ -39,7 +39,8 @@ implementation
 function TModelProdutoDTO<T>.&End: T;
 begin
   Result := FParent;
-  FJsonArrayProdutos.AddElement(FJson);
+  if FJson.Count > 0 then
+    FJsonArrayProdutos.AddElement(FJson);
   FJsonPair.AddPair('produto', FJsonArrayProdutos);
 end;
 
@@ -78,7 +79,8 @@ end;
 
 destructor TModelProdutoDTO<T>.Destroy;
 begin
-
+  if FJson.Count = 0 then
+    FJson.Free;
   inherited;
 end;
 
