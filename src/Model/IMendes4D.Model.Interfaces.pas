@@ -50,6 +50,8 @@ type
   iModelProdutosAlteradosDTO<T> = interface
     ['{B18585E2-ABD0-48F3-9F1A-B8F978525019}']
     function CNPJ(const Value: string): iModelProdutosAlteradosDTO<T>;
+    function UF(const Value: string): iModelProdutosAlteradosDTO<T>;
+    function Limite(const Value: integer): iModelProdutosAlteradosDTO<T>;
     function &End: T;
   end;
 
