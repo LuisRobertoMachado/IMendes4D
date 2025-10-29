@@ -33,7 +33,7 @@ type
     // function CodigoImendes(Value: integer): iModelProdutoDTO<T>;
     function Descricao(const Value: string): iModelProdutoDTO<T>;
     // function Refeicao(value: Char): iModelProdutoDTO<T>;
-    // function TipoCodigo(value: integer): iModelProdutoDTO<T>;
+    function TipoCodigo(value: integer): iModelProdutoDTO<T>;
     function NCM(const Value: string): iModelProdutoDTO<T>;
     function Next: iModelProdutoDTO<T>;
     function &End: T;

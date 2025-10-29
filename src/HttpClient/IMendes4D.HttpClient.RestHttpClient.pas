@@ -4,8 +4,12 @@ interface
 
 uses
   System.SysUtils,
+  IdSSL,
   REST.Client,
   REST.Types,
+//{$IFDEF DEBUG}
+  GravarLog,
+//{$ENDIF}
   IMendes4D.HttpClient.Interfaces;
 
 type
@@ -34,6 +38,9 @@ type
 
 implementation
 
+uses
+  System.Net.HttpClient;
+
 { THttpClient }
 
 function THttpClient.Body(Value: string): iHttpClient;
@@ -45,6 +52,9 @@ end;
 function THttpClient.Content: string;
 begin
   Result := FRestResponse.Content;
+{$IFDEF DEBUG}
+  TGravarLog.New.DoSavelog('JSON Recebido: ' + FRestResponse.Content);
+{$ENDIF}
 end;
 
 constructor THttpClient.Create;
@@ -87,7 +97,9 @@ end;
 function THttpClient.POST(const EndPoint: string): iHttpClient;
 begin
   DoBeforeExecute;
-
+//{$IFDEF DEBUG}
+  TGravarLog.New.DoSavelog('JSON Enviado: ' + FBody);
+//{$ENDIF}
   FRestRequest.Method := rmPOST;
   FRestRequest.Resource := EndPoint;
   FRestRequest.Execute;
@@ -103,6 +115,8 @@ begin
   FRestClient.ContentType := 'application/json';
   FRestClient.FallbackCharsetEncoding := 'utf-8';
   FRestClient.HandleRedirects := true;
+  FRestClient.SecureProtocols := [THTTPSecureProtocol.TLS12,
+    THTTPSecureProtocol.TLS13];
 end;
 
 procedure THttpClient.SetRestRequest;
@@ -135,6 +149,7 @@ end;
 function THttpClient.StatusCode: integer;
 begin
   Result := FRestResponse.StatusCode;
+
 end;
 
 function THttpClient.URL(AURL: string): iHttpClient;
