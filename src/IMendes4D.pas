@@ -39,7 +39,7 @@ end;
 
 constructor TIMendes4D.Create;
 begin
-  raise Exception.Create('Para obter uma instancia, utiliza a função New');
+  raise Exception.Create('Para obter uma instancia, utiliza a fun'#231#227'o New');
 end;
 
 constructor TIMendes4D.CreatePrivate;

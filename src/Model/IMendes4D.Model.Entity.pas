@@ -42,7 +42,7 @@ end;
 
 constructor TEntity.Create;
 begin
-  raise Exception.Create('Para obter uma instancia, utiliza a função New');
+  raise Exception.Create('Para obter uma instancia, utiliza a fun'#231#227'o New');
 end;
 
 constructor TEntity.CreatePrivate;

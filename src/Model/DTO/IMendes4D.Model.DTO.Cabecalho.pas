@@ -26,6 +26,7 @@ type
     function Regime(Value: char): iModelCabecalhoDTO<T>;
     function Ambiente(Value: integer): iModelCabecalhoDTO<T>;
     function Contribuinte(Value: integer): iModelCabecalhoDTO<T>;
+    function Municipio(const Value: string): iModelCabecalhoDTO<T>;
     function &End: T;
     class function New(Parent: iModelRegrasFiscaisDTO; JSON: TJSONObject)
       : iModelCabecalhoDTO<T>;
@@ -74,7 +75,7 @@ end;
 
 constructor TModelCabecalhoDTO<T>.Create;
 begin
-  raise Exception.Create('Para obter uma instancia, utiliza a função New');
+  raise Exception.Create('Para obter uma instancia, utiliza a fun'#231#227'o New');
 end;
 
 constructor TModelCabecalhoDTO<T>.CreatePrivate(Parent: iModelRegrasFiscaisDTO;
@@ -101,6 +102,12 @@ class function TModelCabecalhoDTO<T>.New(Parent: iModelRegrasFiscaisDTO; JSON: T
   : iModelCabecalhoDTO<T>;
 begin
   Result := Self.CreatePrivate(Parent, JSON);
+end;
+
+function TModelCabecalhoDTO<T>.Municipio(const Value: string): iModelCabecalhoDTO<T>;
+begin
+  Result := Self;
+  FJson.AddPair('municipio', Value);
 end;
 
 function TModelCabecalhoDTO<T>.Regime(Value: char): iModelCabecalhoDTO<T>;

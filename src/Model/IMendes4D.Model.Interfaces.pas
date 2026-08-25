@@ -17,6 +17,7 @@ type
     function Regime(Value: char): iModelCabecalhoDTO<T>;
     function Ambiente(Value: integer): iModelCabecalhoDTO<T>;
     function Contribuinte(Value: integer): iModelCabecalhoDTO<T>;
+    function Municipio(const Value: string): iModelCabecalhoDTO<T>;
     function &End: T;
   end;
 
